@@ -42,7 +42,7 @@ def intersection(h1, h2):
 
     while h1 or h2:
 
-        flags["flags1-while"] += 1 # ? Increment flag!
+        flags["flag1-while"] += 1 # ? Increment flag!
 
         count += 1
 
@@ -76,11 +76,11 @@ def intersection(h1, h2):
 
     while longer and shorter:
 
-        flags["flags8-while"] += 1 # ? Increment flag!
+        flags["flag8-while"] += 1 # ? Increment flag!
 
         while long_len > short_len:
 
-            flags["flags9-while"] += 1 # ? Increment flag!
+            flags["flag9-while"] += 1 # ? Increment flag!
 
             # force the longer of the two lists to "catch up"
             longer = longer.next
@@ -129,4 +129,6 @@ def test_intersection(self):
 
 if __name__ == '__main__':
 
-    test_intersection()
+    test_intersection(unittest.TestCase)
+
+    print(flags)
