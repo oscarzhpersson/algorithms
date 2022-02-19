@@ -97,10 +97,7 @@ def intersection(h1, h2):
 
     return None
 
-
-class TestSuite(unittest.TestCase):
-
-    def test_intersection(self):
+def test_intersection(self):
 
         # create linked list as:
         # 1 -> 3 -> 5
@@ -132,4 +129,4 @@ class TestSuite(unittest.TestCase):
 
 if __name__ == '__main__':
 
-    unittest.main()
+    test_intersection()
