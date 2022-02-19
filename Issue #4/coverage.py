@@ -16,12 +16,10 @@ flags = {
     "flag4" : False,
     "flag5" : False,
     "flag6" : False,
-    "flag7" : False,
+    "flag7-while" : False,
     "flag8-while" : 0,
-    "flag9-while" : 0,
-    "flag10" : False,
-    "flag11-else" : False,
-    "flag12" : False
+    "flag9" : 0,
+    "flag10-else" : False,
 }
     
 
@@ -33,7 +31,7 @@ class Node(object):
 
 def intersection(h1, h2):
 
-    flags["flag0"] = True
+    flags["flag0"] = True # ! Unsure if this should be here. Disable if not.
 
     count = 0
     flag = None
@@ -52,11 +50,11 @@ def intersection(h1, h2):
             flag = (count, h1.next, h2.next)
 
         if h1:
-            flags["flag4"] = True # ? Set flag!
+            flags["flag3"] = True # ? Set flag!
             h1 = h1.next
             
         if h2:
-            flags["flag5"] = True # ? Set flag!
+            flags["flag4"] = True # ? Set flag!
             h2 = h2.next
             
 
@@ -64,34 +62,36 @@ def intersection(h1, h2):
     short_len = flag[0]
 
     if flag[1] is None:
-        flags["flag6"] = True # ? Set flag!
+        flags["flag5"] = True # ? Set flag!
         shorter = h1_orig
         longer = h2_orig
         
     elif flag[2] is None:
-        flags["flag7"] = True # ? Set flag!
+        # ! Never reached.
+        flags["flag6"] = True # ? Set flag!
         shorter = h2_orig
         longer = h1_orig
         
 
     while longer and shorter:
 
-        flags["flag8-while"] += 1 # ? Increment flag!
+        flags["flag7-while"] += 1 # ? Increment flag!
 
         while long_len > short_len:
 
-            flags["flag9-while"] += 1 # ? Increment flag!
+            # ! Never reached.
+            flags["flag8-while"] += 1 # ? Increment flag!
 
             # force the longer of the two lists to "catch up"
             longer = longer.next
             long_len -= 1
 
         if longer == shorter:
-            flags["flag10"] = True # ? Set flag!
+            flags["flag9"] = True # ? Set flag!
             # The nodes match, return the node
             return longer
         else:
-            flags["flag11-else"] = True # ? Set flag!
+            flags["flag10-else"] = True # ? Set flag!
             longer = longer.next
             shorter = shorter.next
 
