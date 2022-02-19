@@ -124,7 +124,9 @@ def test_intersection(self):
         d.next = e
         e.next = f
 
-        self.assertEqual(7, intersection(a1, a2).val)
+        assert(intersection(a1, a2).val == 7)
+
+        #self.assertEqual(7, intersection(a1, a2).val)
 
 
 if __name__ == '__main__':
