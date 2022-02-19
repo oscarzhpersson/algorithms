@@ -133,4 +133,5 @@ if __name__ == '__main__':
 
     test_intersection(unittest.TestCase)
 
-    print(flags)
+    for index, (key, val) in enumerate(flags.items()):
+        print(f'Index: {index}, Key: {key}, Value: {val}')
