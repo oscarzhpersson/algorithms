@@ -31,7 +31,7 @@ class Node(object):
 
 def intersection(h1, h2):
 
-    flags["flag0"] = True # ! Unsure if this should be here. Disable if not.
+    flags["flag0"] = True # ! Unsure if this should be here. Disable if not. Complexity is now 19 with this, whereas lizard gave 18.
 
     count = 0
     flag = None
@@ -128,10 +128,36 @@ def test_intersection(self):
 
         #self.assertEqual(7, intersection(a1, a2).val)
 
+# Added test which runs the branches that the previous test did not run.
+    # When there are no matching nodes.
+    # When one list is longer than the other before the element is found. (Asymmetry)
+def test_Fixed(self):
+
+    a1 = Node(1)
+    a2 = Node(2)
+    a3 = Node(3)
+    a4 = Node(4)
+    a5 = Node(5)
+
+    b1 = Node(1)
+    b2 = Node(2)
+
+    a1.next = a2
+    a2.next = a3
+    a3.next = a4
+    a4.next = a5
+
+    b1.next = b2
+
+    assert(intersection(a1, b1) == None)
+
+    #print(intersection(a1, b1))
 
 if __name__ == '__main__':
 
     test_intersection(unittest.TestCase)
+
+    test_Fixed(unittest.TestCase)
 
     for index, (key, val) in enumerate(flags.items()):
         print(f'Index: {index}, Key: {key}, Value: {val}')
