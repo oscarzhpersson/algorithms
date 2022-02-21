@@ -41,6 +41,7 @@ from algorithms.strings import (
     atbash,
     longest_palindrome,
     knuth_morris_pratt,
+    text_justification_refactored,
     panagram
 )
 
@@ -508,6 +509,24 @@ class TestTextJustification(unittest.TestCase):
                           "shall be        "],
 
                          text_justification(["What", "must", "be", "acknowledgment", "shall", "be"]
+                                            , 16)
+                         )
+
+class TestTextJustificationRefactored(unittest.TestCase):
+    def test_text_justification_refactored(self):
+        self.assertEqual(["This    is    an",
+                          "example  of text",
+                          "justification.  "],
+
+                         text_justification_refactored(["This", "is", "an", "example", "of", "text", "justification."]
+                                            , 16)
+                         )
+
+        self.assertEqual(["What   must   be",
+                          "acknowledgment  ",
+                          "shall be        "],
+
+                         text_justification_refactored(["What", "must", "be", "acknowledgment", "shall", "be"]
                                             , 16)
                          )
 

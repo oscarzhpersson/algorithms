@@ -44,13 +44,16 @@ def text_justification(words, max_width):
     is_first_word = True  # is current word the first in a row
     while index < len(words):
         while row_len <= max_width and index < len(words):
+            # This could probably be done outside the loop.
             if len(words[index]) > max_width:
                 raise ValueError("there exists word whose length is larger than max_width")
             tmp = row_len
             row_words.append(words[index])
             tmp += len(words[index])
+            # Is this needed? Could just begin at -1
             if not is_first_word:
                 tmp += 1  # except for the first word, each word should have at least a ' ' before it.
+            # Can't the break be done earlier?
             if tmp > max_width:
                 row_words.pop()
                 break
@@ -60,12 +63,14 @@ def text_justification(words, max_width):
         # here we have already got a row of str , then we should supplement enough ' ' to make sure the length is max_width.
         row = ""
         # if the row is the last
+        # Separate function
         if index == len(words):
             for word in row_words:
                 row += (word + ' ')
             row = row[:-1]
             row += ' ' * (max_width - len(row))
         # not the last row and more than one word
+        # Separate function 
         elif len(row_words) != 1:
             space_num = max_width - row_len
             space_num_of_each_interval = space_num // (len(row_words) - 1)
