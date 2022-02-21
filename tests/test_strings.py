@@ -45,6 +45,7 @@ from algorithms.strings import (
 )
 
 import unittest
+import numpy as np
 
 
 class TestAddBinary(unittest.TestCase):
@@ -495,21 +496,29 @@ class TestCountBinarySubstring(unittest.TestCase):
 
 class TestTextJustification(unittest.TestCase):
     def test_text_justification(self):
+
+        res, a1 = text_justification(["This", "is", "an", "example", "of", "text", "justification."]
+                                            , 16)
+
         self.assertEqual(["This    is    an",
                           "example  of text",
                           "justification.  "],
 
-                         text_justification(["This", "is", "an", "example", "of", "text", "justification."]
-                                            , 16)
+                         res
                          )
+
+
+        res, a2 = text_justification(["What", "must", "be", "acknowledgment", "shall", "be"]
+                                            , 16)
 
         self.assertEqual(["What   must   be",
                           "acknowledgment  ",
                           "shall be        "],
 
-                         text_justification(["What", "must", "be", "acknowledgment", "shall", "be"]
-                                            , 16)
+                         res
                          )
+            
+        print(np.logical_or(a1, a2))
 
 class TestMinDistance(unittest.TestCase):
     def test_min_distance(self):

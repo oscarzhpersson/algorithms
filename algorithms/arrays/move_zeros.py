@@ -21,6 +21,3 @@ def move_zeros(array):
     
     result.extend([0] * zeros)
     return result
-
-
-print(move_zeros([False, 1, 0, 1, 2, 0, 1, 3, "a"]))

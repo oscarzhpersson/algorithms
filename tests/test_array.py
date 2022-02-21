@@ -20,6 +20,7 @@ from algorithms.arrays import (
 )
 
 import unittest
+import numpy as np
 
 
 class TestJosephus(unittest.TestCase):
@@ -340,12 +341,16 @@ class TestSummaryRanges(unittest.TestCase):
 class TestThreeSum(unittest.TestCase):
 
     def test_three_sum(self):
-
-        self.assertSetEqual(three_sum([-1, 0, 1, 2, -1, -4]),
+        res, a1 = three_sum([-1, 0, 1, 2, -1, -4])
+        self.assertSetEqual(res,
                             {(-1, 0, 1), (-1, -1, 2)})
 
-        self.assertSetEqual(three_sum([-1, 3, 1, 2, -1, -4, -2]),
+        res, a2 = three_sum([-1, 3, 1, 2, -1, -4, -2])
+        self.assertSetEqual(res,
                             {(-4, 1, 3), (-2, -1, 3), (-1, -1, 2)})
+
+        print(np.logical_or(a1, a2))
+        
 
 
 class TestTwoSum(unittest.TestCase):
