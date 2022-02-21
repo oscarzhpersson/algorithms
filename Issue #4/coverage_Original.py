@@ -10,7 +10,8 @@ import unittest
 
 flags = {
     "flag0" : False,
-    "flag1-while" : 0,
+    "flag1-while-h1" : 0,
+    "flag1-while-h2" : 0,
     "flag2" : False,
     "flag3" : False,
     "flag4" : False,
@@ -40,7 +41,11 @@ def intersection(h1, h2):
 
     while h1 or h2:
 
-        flags["flag1-while"] += 1 # ? Increment flag!
+        if h1:
+            flags["flag1-while-h1"] += 1 # ? Increment flag!
+        
+        if h2:
+            flags["flag1-while-h2"] += 1 # ? Increment flag!
 
         count += 1
 
