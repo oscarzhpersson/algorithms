@@ -137,45 +137,9 @@ def test_intersection(self):
     # When there are no matching nodes.
     # When one list is longer than the other before the element is found. (Asymmetry)
 
-def test_Fixed_Flag8(self):
-
-    a1 = Node(1)
-    a2 = Node(2)
-
-    b1 = Node(1)
-
-    a1.next = a2
-
-    b1.next = a1
-
-    assert(intersection(a1, b1).val == 1)
-
-def test_Fixed_Flag6(self):
-
-    a1 = Node(1)
-    a2 = Node(2)
-    a3 = Node(3)
-    a4 = Node(4)
-    a5 = Node(5)
-
-    b1 = Node(1)
-    b2 = Node(2)
-
-    a1.next = a2
-    a2.next = a3
-    a3.next = a4
-    a4.next = a5
-
-    b1.next = b2
-
-    assert(intersection(a1, b1) == None)
-
 if __name__ == '__main__':
 
     test_intersection(unittest.TestCase)
-
-    test_Fixed_Flag6(unittest.TestCase)
-    test_Fixed_Flag8(unittest.TestCase)
 
     for index, (key, val) in enumerate(flags.items()):
         print(f'Index: {index}, Key: {key}, Value: {val}')
