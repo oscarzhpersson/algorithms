@@ -89,6 +89,7 @@ def text_justification(words, max_width):
                     branch_array[10] = True
                     row += ' ' * (1 + space_num_of_each_interval)
                 if space_num_rest > 0:
+                    print(row_words)
                     branch_array[11] = True
                     row += ' '
                     space_num_rest -= 1
