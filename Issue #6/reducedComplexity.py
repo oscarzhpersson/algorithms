@@ -18,7 +18,23 @@ class Node(object):
         self.next = None
 
 
-def intersection(h1, h2):
+def listCatchup(short, long, list):
+        while(long > short):
+            list = list.next
+            long -= 1
+
+        return (list, long)
+
+def generateFlag(count, h1, h2):
+    if h1.next is None or h2.next is None:
+        return (count, h1.next, h2.next)
+
+def getNext(h):
+    if h:
+        h = h.next
+    return h
+
+def intersection_Refactored(h1, h2):
 
     count = 0
     flag = None
@@ -28,14 +44,12 @@ def intersection(h1, h2):
     while h1 or h2:
         count += 1
 
-        if not flag and (h1.next is None or h2.next is None):
-            # We hit the end of one of the lists, set a flag for this
-            flag = (count, h1.next, h2.next)
+        # We hit the end of one of the lists, set a flag for this
+        if not flag:
+            flag = generateFlag(count, h1, h2)
 
-        if h1:
-            h1 = h1.next
-        if h2:
-            h2 = h2.next
+        h1 = getNext(h1)
+        h2 = getNext(h2)
 
     long_len = count    # Mark the length of the longer of the two lists
     short_len = flag[0]
@@ -49,17 +63,14 @@ def intersection(h1, h2):
 
     while longer and shorter:
 
-        while long_len > short_len:
-            # force the longer of the two lists to "catch up"
-            longer = longer.next
-            long_len -= 1
+        longer, long_len = listCatchup(short_len, long_len, longer)
 
         if longer == shorter:
             # The nodes match, return the node
             return longer
-        else:
-            longer = longer.next
-            shorter = shorter.next
+        
+        longer = longer.next
+        shorter = shorter.next
 
     return None
 
@@ -93,7 +104,7 @@ class TestSuite(unittest.TestCase):
         d.next = e
         e.next = f
 
-        self.assertEqual(7, intersection(a1, a2).val)
+        self.assertEqual(7, intersection_Refactored(a1, a2).val)
 
 
 if __name__ == '__main__':
