@@ -66,7 +66,7 @@ def intersection(h1, h2):
         shorter = h1_orig
         longer = h2_orig
         
-    elif flag[2] is None:
+    elif flag[2] is None: # List 1 has a next element, but List 2 has no more elements.
         # ! Never reached.
         flags["flag6"] = True # ? Set flag!
         shorter = h2_orig
@@ -131,7 +131,21 @@ def test_intersection(self):
 # Added test which runs the branches that the previous test did not run.
     # When there are no matching nodes.
     # When one list is longer than the other before the element is found. (Asymmetry)
-def test_Fixed(self):
+
+def test_Fixed_Flag8(self):
+
+    a1 = Node(1)
+    a2 = Node(2)
+
+    b1 = Node(1)
+
+    a1.next = a2
+
+    b1.next = a1
+
+    assert(intersection(a1, b1).val == 1)
+
+def test_Fixed_Flag6(self):
 
     a1 = Node(1)
     a2 = Node(2)
@@ -151,13 +165,12 @@ def test_Fixed(self):
 
     assert(intersection(a1, b1) == None)
 
-    #print(intersection(a1, b1))
-
 if __name__ == '__main__':
 
     test_intersection(unittest.TestCase)
 
-    test_Fixed(unittest.TestCase)
+    test_Fixed_Flag6(unittest.TestCase)
+    test_Fixed_Flag8(unittest.TestCase)
 
     for index, (key, val) in enumerate(flags.items()):
         print(f'Index: {index}, Key: {key}, Value: {val}')
