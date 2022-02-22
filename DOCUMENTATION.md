@@ -234,7 +234,7 @@ Number of test cases added: two per team member (P) or at least four (P+).
 
 ## Self-assessment: Way of working
 
-Using the Essence Standards Checklist for Way-of-Working we have established that we are in the state “Collaborating”. We have evaluated ourselves to still remain in the same state as previously. While we are more coherent as a group in general, and while we still follow the previously established ways of working no further progress was made in regards to the Essence standard because of the individual nature of this particular assignment. We still collaborate well, but we decided (as the assignment states) to individually progress then summarize in a group.
+Using the Essence Standards Checklist for Way-of-Working we have established that we are in the state In-Place. We have evaluated ourselves to still remain in the same state as previously. While we are more coherent as a group in general, and while we still follow the previously established ways of working no further progress was made in regards to the Essence standard because of the individual nature of this particular assignment. We still collaborate well, but we decided (as the assignment states) to individually progress then summarize in a group.
 
 The self-assessment was written as a group, by the group. While we have not improved with regards to the essence steps we would like to add that we are closer to the next step than before. We just deem that the individual nature of the assignment prevents us from claiming to be one step further.
 
