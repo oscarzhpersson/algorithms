@@ -14,6 +14,7 @@ from algorithms.matrix import (
     sort_matrix_diagonally
 )
 import unittest
+import numpy as np
 
 
 class TestBombEnemy(unittest.TestCase):
@@ -356,19 +357,48 @@ class TestSumSubSquares(unittest.TestCase):
 
 
 class TestSortMatrixDiagonally(unittest.TestCase):
+    
     def test_sort_diagonally(self):
+        flags = {}
+
+        # Tests that function sorts properly
         mat = [
             [3, 3, 1, 1],
             [2, 2, 1, 2],
             [1, 1, 1, 2]
         ]
 
-        self.assertEqual(sort_matrix_diagonally.sort_diagonally(mat), [
+        res_mat, res_flags  = sort_matrix_diagonally.sort_diagonally(mat)
+        flags = np.logical_or(flags, res_flags)
+        self.assertEqual(res_mat, [
             [1, 1, 1, 1],
             [1, 2, 2, 2],
             [1, 2, 3, 3]
         ])
 
 
+        # Tests len(mat) == 1
+        mat = [
+            [1, 1, 1, 2]
+        ]
+        res_mat, res_flags  = sort_matrix_diagonally.sort_diagonally(mat)
+        flags = np.logical_or(flags, res_flags)
+        self.assertEqual(res_mat, mat)
+
+        # Tests len(mat[0]) == 1
+        mat = [
+            [3],
+            [2, 2, 1, 2],
+            [1, 1, 1, 2]
+        ]
+        res_mat, res_flags  = sort_matrix_diagonally.sort_diagonally(mat)
+        flags = np.logical_or(flags, res_flags)
+        self.assertEqual(res_mat, mat)
+
+        print("\nfunction sort_diagonally branch coverage")
+        for key, value in flags.items() :
+            print(key + ": " + str(value))
+
+        
 if __name__ == "__main__":
     unittest.main()

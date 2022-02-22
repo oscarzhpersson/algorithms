@@ -40,10 +40,11 @@ def sort_diagonally(mat: List[List[int]]) -> List[List[int]]:
     # as input in the unit test for this function
     if len(mat) == 1:
         flags["0"] += 1
-        return mat
+        return mat, flags
     
     if len(mat[0]) == 1:
         flags["1"] += 1
+        return mat, flags
 
     # Rows + columns - 1
     # The -1 helps you to not repeat a column
@@ -97,13 +98,6 @@ def sort_diagonally(mat: List[List[int]]) -> List[List[int]]:
                 mat[row][col] = ele
                 row += 1
                 col += 1
-
-    print("function sort_diagonally")
-    for key,value in flags.items():
-        print(key + ": " + str(value))
-
-    for key in flags:
-        flags[key] = 0
     
     # Return the updated matrix
-    return mat
+    return mat, flags
