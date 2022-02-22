@@ -209,6 +209,18 @@ integrate it with your build environment?
 
 ### Your own coverage tool
 
+1. What is the quality of your own coverage measurement? Does it take into account ternary operators (condition ? yes : no) and exceptions, if available in your language?
+
+It takes into account every ternary operator and exception it encounters. Each coverage measurement is tailored to the specific function chosen.
+
+2. What are the limitations of your tool? How would the instrumentation change if you modify the program?
+
+Since the tools are tailored towards the functions, they would need to be modified if the code of the function in question would be changed, since branches could increase or decrease.
+
+3. If you have an automated tool, are your results consistent with the ones produced by existing tool(s)?
+
+The results of our manual branch coverage matched the results from the automated coverage tool we used, which was coverage.py.
+
 Show a patch (or link to a branch) that shows the instrumented code to
 gather coverage measurements.
 The patch is probably too long to be copied here, so please add
