@@ -33,7 +33,10 @@ flags = {
 }
 
 def sort_diagonally(mat: List[List[int]]) -> List[List[int]]:
+
     # If the input is a vector, return the vector
+    # This if statement is never tested, a vector is never given 
+    # as input in the unit test for this function
     if len(mat) == 1 or len(mat[0]) == 1:
         flags["0"] += 1
         return mat
