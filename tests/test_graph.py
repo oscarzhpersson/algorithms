@@ -134,6 +134,19 @@ class TestMaximum_Flow_Bfs(unittest.TestCase):
     Arguments:
         unittest {[type]} -- [description]
     """
+    def test_maximum_flow_bfs(self):
+        graph = [
+            [[0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0]]
+        ]
+        maximum_flow = maximum_flow_bfs(graph)
+
+        self.assertEqual(maximum_flow, 0)
+    
     
     def test_maximum_flow_bfs(self):
         graph = [

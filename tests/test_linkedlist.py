@@ -56,6 +56,14 @@ class TestSuite(unittest.TestCase):
         head.next.next.next = Node(4)
         self.assertEqual([4, 3, 2, 1], convert(reverse_list_recursive(head)))
         
+        head = Node(4)
+        head.next = Node(3)
+        head.next.next = Node(2)
+        head.next.next.next = Node(1)
+        self.assertEqual([4, 3, 2, 1], convert(reverse_list_recursive(head)))
+        head = Node(4)
+        self.assertEqual([4], convert(reverse_list_recursive(head)))
+        
     def test_is_sorted(self):
         head = Node(-2)
         head.next = Node(2)

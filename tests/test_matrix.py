@@ -39,8 +39,6 @@ class TestBombEnemy(unittest.TestCase):
         ]
         self.assertEqual(5, bomb_enemy.max_killed_enemies(grid1))
         self.assertEqual(3, bomb_enemy.max_killed_enemies(grid2))
-
-
 class TestCopyTransform(unittest.TestCase):
     """[summary]
     Test for the file copy_transform.py

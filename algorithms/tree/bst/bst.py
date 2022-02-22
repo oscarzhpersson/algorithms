@@ -134,6 +134,6 @@ class TestSuite(unittest.TestCase):
 
     def test_size(self):
         self.assertEqual(11, self.tree.size())
-
+        
 if __name__ == '__main__':
     unittest.main()

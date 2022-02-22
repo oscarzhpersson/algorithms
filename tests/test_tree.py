@@ -12,6 +12,7 @@ from algorithms.tree import construct_tree_postorder_preorder as ctpp
 
 from algorithms.tree.fenwick_tree.fenwick_tree import Fenwick_Tree
 
+from algorithms.tree.bst.delete_node import Solution
 import unittest
 
 
@@ -21,6 +22,34 @@ class Node:
         self.val = val
         self.left = left
         self.right = right
+
+class BST(object):
+    def __init__(self):
+        self.root = None
+
+    def get_root(self):
+        return self.root
+
+    def insert(self, data):
+            if self.root:
+                return self.recur_insert(self.root, data)
+            else:
+                self.root = Node(data)
+                return True
+     
+    def search(self, data):
+            return self.recur_search(self.root, data)
+
+    def recur_search(self, root, data):
+        if root is None:
+            return False
+        if root.data == data:
+            return True
+        elif data > root.data:     # Go to right root
+            return self.recur_search(root.right, data)
+        else:                      # Go to left root
+            return self.recur_search(root.left, data)
+
 
 
 class TestTraversal(unittest.TestCase):
@@ -169,6 +198,30 @@ class TestFenwickTree(unittest.TestCase):
         freq[2] += 11
         ft.update_bit(bit_tree, 2, 11)
         self.assertEqual(23, ft.get_sum(bit_tree, 4))
+        
+class delete_node(unittest.TestCase):
+    def setUp(self):
+        self.tree = BST()
+        self.tree.insert(10)
+        self.tree.insert(15)
+        self.tree.insert(6)
+        self.tree.insert(4)
+        self.tree.insert(9)
+        self.tree.insert(12)
+        self.tree.insert(24)
+        self.tree.insert(7)
+        self.tree.insert(20)
+        self.tree.insert(30)
+        self.tree.insert(18)
+        
+        Solution.delete_node(30)
+        self.assertFalse(self.tree.search(30))
+        
+        Solution.delete_node(30)
+        self.assertFalse(self.tree.search(24))
+
+        self.tree = BST()
+        self.assertEqual(self.tree, None)
 
 if __name__ == '__main__':
     unittest.main()
