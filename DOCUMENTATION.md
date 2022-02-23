@@ -288,8 +288,8 @@ The tests did not check flag 3, this part of the code should throw an exception 
 
 The second test added increases the path coverage, as flag 10 and flag 11 was not both visited. This tests whether it can both justify lines with several Words and lines with only one Word.
 
-Previous coverage: 10/11 flags
-New coverage 11/11 flags.
+Previous coverage: https://github.com/oscarzhpersson/algorithms/blob/Issue%234_timjonss/algorithms/strings/text_justification.py **10/11 flags**
+New coverage: https://github.com/oscarzhpersson/algorithms/blob/Issue%235_timjonss/algorithms/strings/text_justification.py **11/11 flags**
 
 git diff main:tests/test_strings.py tests/test_strings.py
 
