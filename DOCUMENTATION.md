@@ -194,18 +194,37 @@ The documentation is very bare-bones, barely describing the functionality of eac
 
 ## Refactoring
 
-Plan for refactoring complex code:
-Estimated impact of refactoring (lower CC, but other drawbacks?).
-Carried out refactoring (optional, P+):
-git diff ...
+During the refactoring step each member looked over the code in order to identify a list of key elements within their function. These key elements could be something similar to: similar pieces of code, unecessary branching or pieces of code that could be separated into smaller modules.
+
+For each of these elements steps were taken to refactor the code in order to reduce the cyclomatic complecity of the function. This proved to be possible for some of the functions, but not for others. In the cases where it was not possible it was explained why.
+
+1. If pieces of code were similar, the code snippets were made into their own function which repeatedly called at the appropriate points of the code.
+2. If the code branched unecessarily (for example an extra if-statement) the unecessary branch was pruned in order to reduce the complexity.
+3. If one could separate the function into smaller modules, the code was separated into these modules.
+
+The most occurring refactoring was done through splitting the code into these smaller modules. As we did this for each function the results per refactoring were as follows:
+
+1. intersection.py: Original: 14CCN, Refactored: 9CCN (According to Lizard). https://github.com/oscarzhpersson/algorithms/blob/Issue%236_opers/Issue%20%236/reducedComplexity.py
+
+2. maze_search.py: Original: 13CCN, Refactored: 8CCN (According to Lizard). https://github.com/oscarzhpersson/algorithms/blob/Issue%236_jansen/Issue%20%236/refactored_maze_search.py
+
+3. text_justification.py Original: 13CCN, Refactured: 2CCN (According to Lizard). https://github.com/oscarzhpersson/algorithms/blob/Issue%236_timjonss/algorithms/strings/text_justification_refactored.py
+
+4. sort_matrix_diagonally.py: Original: 10CCN, Refactored: 5CCN (According to Lizard). https://github.com/oscarzhpersson/algorithms/blob/Issue%236_wsod/algorithms/matrix/sort_matrix_diagonally.py
+
+The only function which could not be was the function **maximum_flow_bfs.py**. The reason identified for this is as follows.
+
+By doing some tests for this algorithm the conclusion is that this specific algorihm cannot be refactored without large structural change to the entire function
+The reason that this cannot be restructured is just by the way the entire function is set up. At line 33 there is a while loop that runs until there is no path not
+covered and then it breaks from that loop, it ties together and makes the BFS search and maximum flow tied together. By doing so there is no simple way for the function to be refactored into smaller functions which would help the CC of this function. To summarise the function works atomically per loop-step.
+
+The most prominent impact of this is of course the lower cyclomatic complexity. But as the most used method of refactoring was splitting it into smaller functions, this may make the code more difficult to read or comprehent at first glance, as not everything is as cohesive anymore.
 
 ## Coverage
 
 ### Tools
 
-Document your experience in using a "new"/different coverage tool.
-How well was the tool documented? Was it possible/easy/difficult to
-integrate it with your build environment?
+The tool used to evaluate coverage was coverage.py. coverage.py was easy to implement as it worked as a standalone tool, where one only needed to give it the files one wanted to evaluate and it would run. While the tool was well documented and for the most part, easy to set up, inconsistencies within the chosen repository made the tests difficult to run. Some of the functions had their tests within the unit test folder, while others ran them within the file itself; the latter proving troublesome for coverage.py. The tool worked well for most members however.
 
 ### Your own coverage tool
 
@@ -221,21 +240,99 @@ Since the tools are tailored towards the functions, they would need to be modifi
 
 The results of our manual branch coverage matched the results from the automated coverage tool we used, which was coverage.py.
 
-Show a patch (or link to a branch) that shows the instrumented code to
-gather coverage measurements.
-The patch is probably too long to be copied here, so please add
-the git command that is used to obtain the patch instead:
-git diff ...
-What kinds of constructs does your tool support, and how accurate is
-its output?
+The links to each branch for each changed coverage tool is as follows:
 
+1. intersection.py: https://github.com/oscarzhpersson/algorithms/blob/Issue%234_opers/Issue%20%234/coverage.py
+
+2. maximum_flow_bfs.py: https://github.com/oscarzhpersson/algorithms/blob/Issue%234_Mustali/algorithms/graph/maximum_flow_bfs.py
+
+3. maze_search.py: https://github.com/oscarzhpersson/algorithms/blob/Issue%234_jansen/Issue%234/manual_tool_test.py
+
+4. text_justification.py: https://github.com/oscarzhpersson/algorithms/blob/Issue%234_timjonss/algorithms/strings/text_justification.py
+
+5. sort_matrix_diagonally.py: https://github.com/oscarzhpersson/algorithms/blob/Issue%234_wsod/algorithms/matrix/sort_matrix_diagonally.py
+
+The coverage tool sets flags within a boolean array. These flags are manually placed within the code and thus supports each step of the code that we desire. We decided to use the constructs specified by us using the metrics from the course: if statements, else statements, exceptions, loops, etc.
+
+The accuracy of the tool is measured by checking the flags and are compared using the tool coverage.py
 ### Evaluation
 
 1. How detailed is your coverage measurement?
+
+The coverage measurement is static and only measured step-wise by checking which branches an execution will take using the tests. The flags are persistent between runs, so one can always check the total tally after a run with the custom tools.
+
 2. What are the limitations of your own tool?
+
+The limitation of the tool are dependent on the creator of the tool. If a flag was missed the tool will not take it into account. The tool is also tailored specifically to the function itself, and can not be moved anywhere else afterwards.
+
 3. Are the results of your tool consistent with existing coverage tools?
 
+The results on the tools were consistent with the tool we used to check externally, coverage.py. There was one instance however where the tool could not be run, for the function intersection.py. In that case it was counted manually again. The reason for this was because of how its tests were set up internally, which differed. The repository we picked seemed to suffer from inconsistencies of its users when they are contributing.
+
 ## Coverage improvement
+
+### intersection.py:
+
+Comments that needed to change:
+
+The test did not check the flag "**flags["flag8-while"]**". This flag is enabled if one list is longer than the other, which the test does not examine.
+
+The test did not check the flag "**flags["flag6"]**". This flag is enabled if one list has elements still, while the other one does not.
+
+Report of old coverage: https://github.com/oscarzhpersson/algorithms/blob/Issue%235_opers/Issue%20%234/coverage_Original.py **9/11 flags**
+Report of new coverage: https://github.com/oscarzhpersson/algorithms/blob/Issue%235_opers/Issue%20%235/coverage.py **11/11 flags**
+
+Two test cases were added for these within the report of new coverage as unit tests: **test_Fixed_Flag8** and **test_Fixed_Flag6**.
+### text_justification.py
+The tests did not check flag 3, this part of the code should throw an exception if a Word cannot be fit on a line. I added a test case which decreases the row length. 
+
+The second test added increases the path coverage, as flag 10 and flag 11 was not both visited. This tests whether it can both justify lines with several Words and lines with only one Word.
+
+Previous coverage: 10/11 flags
+New coverage 11/11 flags.
+
+git diff main:tests/test_strings.py tests/test_strings.py
+
+### sort_matrix_diagonally.py:
+
+Comments that needed to change:
+
+The test did not check the flag "flags["0"]". This flag is enabled if there is only one row in the input matrix.
+
+The test did not check the flag "flags["1"]". This flag is enabled if the first row has only one column.
+
+If statement changed in new coverage:
+
+The new coverage split the untested if statement into two if statements, creating the flags "flags["0"]" and "flags["1"]", in order to test the separetely.
+This made it so that there could be two test written, testing the if statements separetely.
+
+Report of old coverage: https://github.com/oscarzhpersson/algorithms/blob/Issue%234_wsod/algorithms/matrix/sort_matrix_diagonally.py **one if statement not tested**
+Report of new coverage: https://github.com/oscarzhpersson/algorithms/blob/Issue%235_wsod/algorithms/matrix/sort_matrix_diagonally.py **if statement split into two, both now tested**
+
+Two test cases were added for these within the report of new coverage as unit tests: test_sort_diagonally.
+
+### maximum_flow_bfs.py
+
+The function already had 100% coverage so there is not lots of parts that needs to be tested for this function. There also hard to create smaller test cases because of how the function is built. The function first needs a connected graph and and then find a path using BFS. If there is no path then the function will leave the function and no maxflow can be find. Therefore this function depends heavily on the first part. What was done is to test the first part seperatly where there is no connected graph and then a test function was already applied for finding the maximum flow.
+
+Instead there are other test cases were added for other functions that were not covered. New testcases were added to for the function delete_node in algorithms/algorithms/tree/bst/delete_node.py. There are no coverage for this function before and after most of the functions were covered.
+
+Flags before for the function maximum_flow_bfs: 10/10
+Flags after: 10/10
+
+Flags before - delete_node.py: 0/7
+Flags after - delete_node.py 7/7
+
+### maze_search.py
+
+The tests have a total of 6 flags, indicated in bfs.maze_search.py
+
+The test did not check the flag 0, which is the first flag that checks if the initial_x & initial_y are 0.
+
+Report of old coverage: https://github.com/oscarzhpersson/algorithms/blob/5ee39468c9c529f5578aa432ea3af0a15f99ae1e/Issue%235/original_coverage.py 5/6 flags.
+Report of new coverage: https://github.com/oscarzhpersson/algorithms/blob/5ee39468c9c529f5578aa432ea3af0a15f99ae1e/Issue%235/coverage.py 6/6 flags.
+
+The additional tests tested the flag 0 as it is seen to be iterated and reaches 100% coverage.
 
 Show the comments that describe the requirements for the coverage.
 Report of old coverage: [link]
@@ -253,5 +350,8 @@ The self-assessment was written as a group, by the group. While we have not impr
 The largest step to progress to the step "working well" would be that the practices are naturally applied, as we still have to remind members occasionally.
 ## Overall experience
 
-What are your main take-aways from this project? What did you learn?
-Is there something special you want to mention here?
+We learnt how to make use of coverage and how to implement it into the workflow in order to write well tested and testable code. We also learnt how to manually evaluate the coverage but also how to use tools which extracts the coverage from functions.
+
+We agree that this could be done for any project henceforth, in order to make sure the entire program is tested. We also learnt how to minimise the cyclomatic complexity when writing code, and how to think with regards to this.
+
+We also learnt the important for consistency when contributing to open source projects.
