@@ -497,6 +497,13 @@ class TestCountBinarySubstring(unittest.TestCase):
 class TestTextJustification(unittest.TestCase):
     def test_text_justification(self):
 
+        ''' Requirements:   Each line consists of words separated by at least one whitespace and the lines are at most of length MaxWidth.
+                            All lines except the last should be justified such that each row is filled up to the max with whitespaces
+                            inbetween words to make up the difference. If there are an unequal number of whitespaces to be inserted, then it
+                            prioritizes the left-most. The last line should not be justified and just have one white space inbetween words.
+
+        ''' 
+        ## Tests whether the words are separated by at least one whitespace and each line is at most 16 characters long. Also tests if lines with multiple words are justified correctly.
         res, a1 = text_justification(["This", "is", "an", "example", "of", "text", "justification."]
                                             , 16)
 
@@ -507,7 +514,7 @@ class TestTextJustification(unittest.TestCase):
                          res
                          )
 
-
+        ## Tests whether the words are separated by at least one whitespace and each line is at most 16 characters long. Also tests if a line with a single words is justified correctly.
         res, a2 = text_justification(["What", "must", "be", "acknowledgment", "shall", "be"]
                                             , 16)
 
@@ -518,7 +525,7 @@ class TestTextJustification(unittest.TestCase):
                          res
                          )
 
-        # Only uncovered path. Checks if both rows with one letter and rows with unevenly distributed justification works.
+        # Only uncovered path. Checks if both rows with one word and rows with unevenly distributed justification works.
         res, a3 = text_justification(["What", "must", "be", "acknowledgment", "shall", "be", "as", "whatever"]
                                             , 16)
 
