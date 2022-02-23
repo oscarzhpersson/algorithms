@@ -33,8 +33,38 @@ flags = {
     "8" : 0, #while
 }
 
-def sort_diagonally(mat: List[List[int]]) -> List[List[int]]:
+# INPUT ARGUMENTS
+# h - heap
+# mat - matrix
+# row - row of matrix
+# col - column of matrix
+# flagID - flags index
+# flag - sets while conditional
 
+def sort_diagonal(h, mat, row, col, flagID):
+    while h:
+        flags[flagID] += 1
+        ele = heappop(h)
+        mat[row][col] = ele
+        row += 1
+        col += 1
+
+def traverse(h, mat, row, col, flagID, flag):
+    if flag: 
+        while row < len(mat) and col < len(mat[0]):
+            row, col = traverse_diagonal(h, mat, row, col, flagID)
+    else:
+        while row < len(mat):
+            row, col = traverse_diagonal(h, mat, row, col, flagID)
+            
+def traverse_diagonal(h, mat, row, col, flagID):
+    flags[flagID] += 1
+    heappush(h, (mat[row][col]))
+    row += 1
+    col += 1
+    return row, col
+
+def sort_diagonally(mat: List[List[int]]) -> List[List[int]]:
     # If the input is a vector, return the vector
     # This if statement is never tested, a vector is never given 
     # as input in the unit test for this function
@@ -53,51 +83,36 @@ def sort_diagonally(mat: List[List[int]]) -> List[List[int]]:
         # Process the rows
         if i+1 < len(mat):
             flags["3"] += 1
+
             # Initialize heap, set row and column
             h = []
             row = len(mat)-(i+1)
             col = 0
 
             # Traverse diagonally, and add the values to the heap
-            while row < len(mat):
-                flags["4"] += 1
-                heappush(h, (mat[row][col]))
-                row += 1
-                col += 1
-
+            traverse(h, mat, row, col, "4", False)
+            
             # Sort the diagonal
             row = len(mat)-(i+1)
             col = 0
-            while h:
-                flags["5"] += 1
-                ele = heappop(h)
-                mat[row][col] = ele
-                row += 1
-                col += 1
+            sort_diagonal(h, mat, row, col, "5")
+
         else:
             flags["6"] += 1
             # Process the columns
+
             # Initialize heap, row and column
             h = []
             row = 0
             col = i - (len(mat)-1)
 
             # Traverse Diagonally
-            while col < len(mat[0]) and row < len(mat):
-                flags["7"] += 1
-                heappush(h, (mat[row][col]))
-                row += 1
-                col += 1
+            traverse(h, mat, row, col, "7", True)
 
             # Sort the diagonal
             row = 0
             col = i - (len(mat)-1)
-            while h:
-                flags["8"] += 1
-                ele = heappop(h)
-                mat[row][col] = ele
-                row += 1
-                col += 1
+            sort_diagonal(h, mat, row, col, "8")
     
     # Return the updated matrix
     return mat, flags
