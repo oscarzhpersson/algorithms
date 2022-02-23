@@ -32,7 +32,7 @@ def maze_search(maze, flag):
 
     initial_x, initial_y = 0, 0
 
-    if maze[initial_x][initial_y] == BLOCKED:
+    if maze[initial_x][initial_y] == BLOCKED:                                           #flag 0
         flag[0] += 1
         return -1
     
@@ -47,22 +47,22 @@ def maze_search(maze, flag):
     is_visited = [[UNVISITED for w in range(width)] for h in range(height)]
     is_visited[initial_x][initial_y] = VISITED
 
-    while queue:
+    while queue:                                                                        #flag 1
         x, y, steps = queue.popleft()
 
-        if x == target_x and y == target_y:
+        if x == target_x and y == target_y:                                             #flag 3
             flag[3] += 1
             return steps
 
-        for dx, dy in directions:
+        for dx, dy in directions:                                                       #flag 2
             new_x = x + dx
             new_y = y + dy
 
-            if not (0 <= new_x < height and 0 <= new_y < width):
+            if not (0 <= new_x < height and 0 <= new_y < width):                        #flag 4
                 flag[4] +=1
                 continue
 
-            if maze[new_x][new_y] == ALLOWED and is_visited[new_x][new_y] == UNVISITED:
+            if maze[new_x][new_y] == ALLOWED and is_visited[new_x][new_y] == UNVISITED: #flag 5
                 queue.append((new_x, new_y, steps + 1))
                 flag[5] += 1
                 is_visited[new_x][new_y] = VISITED

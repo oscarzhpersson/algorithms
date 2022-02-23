@@ -11,6 +11,7 @@ flag = [0]*6
 
 class TestMazeSearch_Issue4(unittest.TestCase):
     
+    # Both tests did not test flag 0
     def test_maze_search(self):
         grid_1 = [[1,0,1,1,1,1],[1,0,1,0,1,0],[1,0,1,0,1,1],[1,1,1,0,1,1]]
         self.assertEqual(14, maze_search(grid_1, flag))
