@@ -500,8 +500,6 @@ class TestTextJustification(unittest.TestCase):
         res, a1 = text_justification(["This", "is", "an", "example", "of", "text", "justification."]
                                             , 16)
 
-        print(a1)
-
         self.assertEqual(["This    is    an",
                           "example  of text",
                           "justification.  "],
@@ -512,8 +510,6 @@ class TestTextJustification(unittest.TestCase):
 
         res, a2 = text_justification(["What", "must", "be", "acknowledgment", "shall", "be"]
                                             , 16)
-
-        print(a2)
 
         self.assertEqual(["What   must   be",
                           "acknowledgment  ",
@@ -526,6 +522,11 @@ class TestTextJustification(unittest.TestCase):
         res, a3 = text_justification(["What", "must", "be", "acknowledgment", "shall", "be", "as", "whatever"]
                                             , 16)
 
+        self.assertEqual(['What   must   be',
+                          'acknowledgment  ', 
+                          'shall    be   as', 
+                          'whatever        '], res)
+
         a_temp = np.logical_or(np.logical_or(a1, a2), a3)
 
         # Adds test which is impossible to fit and justify.
@@ -535,7 +536,7 @@ class TestTextJustification(unittest.TestCase):
         
         self.assertTrue("there exists word whose length is larger than max_width" in str(context.exception))
 
-        a_temp[3] = True
+        a_temp[2] = True
 
         # Adds
 
