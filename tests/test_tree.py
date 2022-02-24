@@ -13,6 +13,9 @@ from algorithms.tree import construct_tree_postorder_preorder as ctpp
 from algorithms.tree.fenwick_tree.fenwick_tree import Fenwick_Tree
 
 from algorithms.tree.bst.delete_node import Solution
+
+from algorithms.tree.bst.is_bst import is_bst
+
 import unittest
 
 
@@ -222,6 +225,14 @@ class delete_node(unittest.TestCase):
 
         self.tree = BST()
         self.assertEqual(self.tree, None)
+        
+class is_bst(unittest.TestCase):
+    def check_tree(self):
+        tree = [1,2,3]
+        self.assertFalse(self.is_bst(tree))
+        
+        tree = [2,1,3]
+        self.assertTrue(self.is_bst(tree))
 
 if __name__ == '__main__':
     unittest.main()
