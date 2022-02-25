@@ -272,9 +272,6 @@ class TestSudokuValidator(unittest.TestCase):
         self.assertTrue(res)
         
         
-        
-
-
         matrix = [
                     [5, 3, 4, 6, 7, 8, 9, 1, 2],
                     [6, 7, 2, 1, 9, 5, 3, 4, 8],
@@ -342,7 +339,44 @@ class TestSudokuValidator(unittest.TestCase):
         flags = np.logical_or(flags, res_flags)  
         self.assertFalse(res)
 
-        
+
+        # Adds test to test flag 3
+        # There exists no valid solution since there is two 1's in first row
+        matrix = [
+                    [5, 3, 4, 1, 7, 8, 9, 1, 2],
+                    [6, 7, 2, 1, 9, 0, 3, 4, 9],
+                    [1, 0, 0, 3, 4, 2, 5, 6, 0],
+                    [8, 5, 9, 7, 6, 1, 0, 2, 0],
+                    [4, 2, 6, 8, 5, 3, 7, 9, 1],
+                    [7, 1, 3, 9, 2, 4, 8, 5, 6],
+                    [9, 0, 1, 5, 3, 7, 2, 1, 4],
+                    [2, 8, 7, 4, 1, 9, 6, 3, 5],
+                    [3, 0, 0, 4, 8, 1, 1, 7, 9]
+                ]
+
+        res, res_flags  = sudoku_validator.valid_solution_hashtable(matrix)      
+        flags = np.logical_or(flags, res_flags)  
+        self.assertFalse(res)
+
+        # Adds test to test flag 5
+        # There exists no valid solution since there is two 1's in first column
+        matrix = [
+                    [5, 3, 4, 6, 7, 8, 9, 1, 2],
+                    [6, 7, 2, 1, 9, 5, 3, 4, 8],
+                    [1, 9, 8, 3, 4, 2, 5, 6, 7],
+                    [8, 5, 9, 7, 6, 1, 4, 2, 3],
+                    [4, 2, 6, 8, 5, 3, 7, 9, 1],
+                    [7, 1, 3, 9, 2, 4, 8, 5, 6],
+                    [9, 6, 1, 5, 3, 7, 2, 8, 4],
+                    [2, 8, 7, 4, 1, 9, 6, 3, 5],
+                    [1, 4, 5, 2, 8, 6, 1, 7, 9]
+                ]
+
+        res, res_flags  = sudoku_validator.valid_solution_hashtable(matrix)      
+        flags = np.logical_or(flags, res_flags)  
+        self.assertFalse(res)
+
+
         matrix = [
                     [5, 3, 4, 6, 7, 8, 9, 1, 2],
                     [6, 7, 2, 1, 9, 0, 3, 4, 9],
