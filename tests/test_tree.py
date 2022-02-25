@@ -173,6 +173,12 @@ class TestFenwickTree(unittest.TestCase):
         ft.update_bit(bit_tree, 2, 11)
         self.assertEqual(23, ft.get_sum(bit_tree, 4))
         
+
+'''
+Adds two additional test cases for the function is_bst which checks if the array is a BST or not.
+The coverage before is: 0/4
+The coverage after the tests: 4/4
+'''
 class is_bst(unittest.TestCase):
     def check_tree(self):
         tree = [1,2,3]
