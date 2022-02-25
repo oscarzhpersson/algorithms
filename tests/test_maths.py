@@ -1,3 +1,4 @@
+from xml.etree.ElementPath import find
 from algorithms.maths import (
     power, power_recur,
     int_to_base, base_to_int,
@@ -27,6 +28,7 @@ from algorithms.maths import (
     alice_private_key, alice_public_key, bob_private_key, bob_public_key, alice_shared_key, bob_shared_key,
     diffie_hellman_key_exchange, krishnamurthy_number,
     chinese_remainder_theorem,
+    find_primitive_root_simple
 )
 
 import unittest
@@ -527,6 +529,13 @@ class TestChineseRemainderSolver(unittest.TestCase):
         rem = []
         with self.assertRaises(Exception):
             chinese_remainder_theorem.solve_chinese_remainder(num, rem)
+
+class TestFindPrimitiveRoot(unittest.TestCase):
+    def test_correct_solution(self):
+        self.assertEqual(find_primitive_root_simple.find_primitive_root(10), [3,7])
+
+    def test_correct_solution(self):
+        self.assertEqual(find_primitive_root_simple.find_primitive_root(1), [1])
 
 if __name__ == "__main__":
     unittest.main()
