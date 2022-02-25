@@ -1,6 +1,7 @@
 from sys import flags
 import unittest
 from remove_range import remove_range
+from is_sorted import is_sorted
 
 
 class Node(object):
@@ -21,6 +22,29 @@ def convert(head):
 
 
 class TestSuite(unittest.TestCase):
+
+    def test_is_sorted(self):
+        ####### INITIAL TESTS START
+        head = Node(-2)
+        head.next = Node(2)
+        head.next.next = Node(2)
+        head.next.next.next = Node(4)
+        head.next.next.next.next = Node(9)
+        # head -> -2 -> 2 -> 2 -> 4 -> 9
+        self.assertTrue(is_sorted(head))
+        head = Node(1)
+        head.next = Node(2)
+        head.next.next = Node(8)
+        head.next.next.next = Node(4)
+        head.next.next.next.next = Node(6)
+        # head -> 1 -> 2 -> 8 -> 4 -> 6
+        self.assertFalse(is_sorted(head))
+        ######## INITIAL TESTS END
+
+        ######## ADDITIONAL TESTS START
+        #Tests the program running with an empty list. Never run previously.
+        self.assertTrue(is_sorted(None))
+
 
     def test_remove_range(self):
 

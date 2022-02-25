@@ -18,7 +18,11 @@ flags = {
 def is_sorted(head):
 
     if not head:
-        flags["flag0"] = True
+
+        flags["flag0"] = True # ! Never run! FIXED.
+
+        for index, (key, val) in enumerate(flags.items()):
+            print(f'Index: {index}, Key: {key}, Value: {val}')
         return True
 
     current = head
@@ -28,6 +32,12 @@ def is_sorted(head):
 
         if current.val > current.next.val:
             flags["flag2"] = True
+
+            for index, (key, val) in enumerate(flags.items()):
+                print(f'Index: {index}, Key: {key}, Value: {val}')
             return False
         current = current.next
+
+    for index, (key, val) in enumerate(flags.items()):
+        print(f'Index: {index}, Key: {key}, Value: {val}')
     return True

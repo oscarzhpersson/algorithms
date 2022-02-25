@@ -36,7 +36,7 @@ def remove_range(head, start, end):
         # Move pointer to start position
         for i in range(0,start-1):
 
-            flags["flag4-for"] += 1 # ! Never run! Finish this and do another function.
+            flags["flag4-for"] += 1 # ! Never run! FIXED.
 
             current = current.next
         # Remove data until the end
