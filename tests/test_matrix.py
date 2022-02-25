@@ -253,9 +253,9 @@ class TestSudokuValidator(unittest.TestCase):
     """
 
     def test_sudoku_validator(self):
-        self.assertTrue(
-            sudoku_validator.valid_solution(
-                [
+        flags = {}
+
+        matrix = [
                     [5, 3, 4, 6, 7, 8, 9, 1, 2],
                     [6, 7, 2, 1, 9, 5, 3, 4, 8],
                     [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -265,11 +265,17 @@ class TestSudokuValidator(unittest.TestCase):
                     [9, 6, 1, 5, 3, 7, 2, 8, 4],
                     [2, 8, 7, 4, 1, 9, 6, 3, 5],
                     [3, 4, 5, 2, 8, 6, 1, 7, 9]
-                ]))
+                ]
 
-        self.assertTrue(
-            sudoku_validator.valid_solution_hashtable(
-                [
+        res, res_flags  = sudoku_validator.valid_solution(matrix)      
+        flags = np.logical_or(flags, res_flags)
+        self.assertTrue(res)
+        
+        
+        
+
+
+        matrix = [
                     [5, 3, 4, 6, 7, 8, 9, 1, 2],
                     [6, 7, 2, 1, 9, 5, 3, 4, 8],
                     [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -279,11 +285,14 @@ class TestSudokuValidator(unittest.TestCase):
                     [9, 6, 1, 5, 3, 7, 2, 8, 4],
                     [2, 8, 7, 4, 1, 9, 6, 3, 5],
                     [3, 4, 5, 2, 8, 6, 1, 7, 9]
-                ]))
+                ]
 
-        self.assertTrue(
-            sudoku_validator.valid_solution_set(
-                [
+        res, res_flags  = sudoku_validator.valid_solution_hashtable(matrix)      
+        flags = np.logical_or(flags, res_flags)  
+        self.assertTrue(res)
+
+        
+        matrix = [
                     [5, 3, 4, 6, 7, 8, 9, 1, 2],
                     [6, 7, 2, 1, 9, 5, 3, 4, 8],
                     [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -293,11 +302,14 @@ class TestSudokuValidator(unittest.TestCase):
                     [9, 6, 1, 5, 3, 7, 2, 8, 4],
                     [2, 8, 7, 4, 1, 9, 6, 3, 5],
                     [3, 4, 5, 2, 8, 6, 1, 7, 9]
-                ]))
+                ]
 
-        self.assertFalse(
-            sudoku_validator.valid_solution(
-                [
+        res, res_flags  = sudoku_validator.valid_solution_set(matrix)      
+        flags = np.logical_or(flags, res_flags)  
+        self.assertTrue(res)
+
+
+        matrix = [
                     [5, 3, 4, 6, 7, 8, 9, 1, 2],
                     [6, 7, 2, 1, 9, 0, 3, 4, 9],
                     [1, 0, 0, 3, 4, 2, 5, 6, 0],
@@ -307,11 +319,14 @@ class TestSudokuValidator(unittest.TestCase):
                     [9, 0, 1, 5, 3, 7, 2, 1, 4],
                     [2, 8, 7, 4, 1, 9, 6, 3, 5],
                     [3, 0, 0, 4, 8, 1, 1, 7, 9]
-                ]))
+                ]
 
-        self.assertFalse(
-            sudoku_validator.valid_solution_hashtable(
-                [
+        res, res_flags  = sudoku_validator.valid_solution(matrix)      
+        flags = np.logical_or(flags, res_flags)  
+        self.assertFalse(res)
+
+       
+        matrix = [
                     [5, 3, 4, 6, 7, 8, 9, 1, 2],
                     [6, 7, 2, 1, 9, 0, 3, 4, 9],
                     [1, 0, 0, 3, 4, 2, 5, 6, 0],
@@ -321,11 +336,14 @@ class TestSudokuValidator(unittest.TestCase):
                     [9, 0, 1, 5, 3, 7, 2, 1, 4],
                     [2, 8, 7, 4, 1, 9, 6, 3, 5],
                     [3, 0, 0, 4, 8, 1, 1, 7, 9]
-                ]))
+                ]
 
-        self.assertFalse(
-            sudoku_validator.valid_solution_set(
-                [
+        res, res_flags  = sudoku_validator.valid_solution_hashtable(matrix)      
+        flags = np.logical_or(flags, res_flags)  
+        self.assertFalse(res)
+
+        
+        matrix = [
                     [5, 3, 4, 6, 7, 8, 9, 1, 2],
                     [6, 7, 2, 1, 9, 0, 3, 4, 9],
                     [1, 0, 0, 3, 4, 2, 5, 6, 0],
@@ -335,7 +353,19 @@ class TestSudokuValidator(unittest.TestCase):
                     [9, 0, 1, 5, 3, 7, 2, 1, 4],
                     [2, 8, 7, 4, 1, 9, 6, 3, 5],
                     [3, 0, 0, 4, 8, 1, 1, 7, 9]
-                ]))
+                ]
+
+        res, res_flags  = sudoku_validator.valid_solution_set(matrix)      
+        flags = np.logical_or(flags, res_flags)  
+        self.assertFalse(res)
+
+        print("\nbranch coverage: sudoku_validator.py")
+        for key, value in flags.items() :
+            print(key + ": " + str(value))
+
+        
+
+        
 
 
 class TestSumSubSquares(unittest.TestCase):
