@@ -12,6 +12,9 @@ from algorithms.tree import construct_tree_postorder_preorder as ctpp
 
 from algorithms.tree.fenwick_tree.fenwick_tree import Fenwick_Tree
 
+from algorithms.tree.bst.is_bst import is_bst
+
+
 import unittest
 
 
@@ -169,6 +172,15 @@ class TestFenwickTree(unittest.TestCase):
         freq[2] += 11
         ft.update_bit(bit_tree, 2, 11)
         self.assertEqual(23, ft.get_sum(bit_tree, 4))
+        
+class is_bst(unittest.TestCase):
+    def check_tree(self):
+        tree = [1,2,3]
+        self.assertFalse(self.is_bst(tree))
+
+        tree = [2,1,3]
+        self.assertTrue(self.is_bst(tree))
+
 
 if __name__ == '__main__':
     unittest.main()
